@@ -1,3 +1,4 @@
+#icons from flaticon by freepik & smashicons
 import pygame
 
 #Initialization
@@ -15,17 +16,51 @@ pygame.display.set_icon(icon)
 playerImg = pygame.image.load('human-ship.png')
 playerX = 370
 playerY = 480
+playerX_change = 0
+playerY_change = 0
 
-def player():
-    screen.blit(playerImg,(playerX,playerY))
+def player(x,y):
+    screen.blit(playerImg,(x,y))
 
 #Game Loop
 running = True
 while running:
+
+    screen.fill((0, 100, 100))
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: #to sprawia, że okno się nie zamyka
             running = False
-    screen.fill((0, 100, 100))
 
-    player()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                playerX_change = -0.2
+            if event.key == pygame.K_RIGHT:
+                playerX_change = 0.2
+            if event.key == pygame.K_DOWN:
+                playerY_change = 0.2
+            if event.key == pygame.K_UP:
+                playerY_change = -0.2
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                playerX_change = 0
+            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                playerY_change = 0
+
+
+
+
+
+
+    playerX += playerX_change
+    playerY += playerY_change
+
+    if playerX <=10:
+        playerX = 10
+    elif playerX >= 726:
+        playerX = 726
+
+
+
+    player(playerX, playerY)
     pygame.display.update()
