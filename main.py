@@ -59,6 +59,10 @@ while running:
         playerX = 10
     elif playerX >= 726:
         playerX = 726
+    if playerY >= 526:
+        playerY = 526
+    elif playerY <= 400:
+        playerY = 400
 
 
 
