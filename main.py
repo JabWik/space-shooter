@@ -59,6 +59,13 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 textX = 10
 textY = 10
 
+over_font = pygame.font.Font('freesansbold.ttf', 32)
+
+def gameOverText(x,y):
+    overShow = over_font.render("Score: " + str(score) + "YOU LOST", True, (255,255,255))
+    screen.blit(overShow, (x, y))
+
+
 def show_score(x,y):
     scoreShow = font.render("Score: " + str(score), True, (255,255,255))
     screen.blit(scoreShow, (x, y))
@@ -133,6 +140,13 @@ while running:
         playerY = 400
 
     for i in range (num_of_enemies):
+
+        if enemyY[i] > 800:
+            for j in range(num_of_enemies):
+                enemyY[j] = 2000
+            gameOverText(200,250)
+            break
+
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 10:
             enemyX_change[i] = 0.3
